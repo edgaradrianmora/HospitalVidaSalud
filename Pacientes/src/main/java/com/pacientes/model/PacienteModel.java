@@ -38,7 +38,7 @@ public class PacienteModel {
                 .flatMap(existente -> Mono.<Paciente>error(
                     new RuntimeException("Ya existe un paciente con ese documento")))
                 .switchIfEmpty(Mono.defer(() -> {
-                    paciente.setEstado("INACTIVO");
+                    paciente.setEstado("ACTIVO");
                     paciente.setFechaRegistro(LocalDateTime.now());
                     return pacienteRepository.save(paciente)
                             .flatMap(guardado ->
