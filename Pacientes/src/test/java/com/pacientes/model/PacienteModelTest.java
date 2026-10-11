@@ -41,12 +41,12 @@ class PacienteModelTest {
     private Paciente nuevoPaciente() {
         Paciente p = new Paciente();
         p.setTipoDocumento("DNI");
-        p.setNumeroDocumento("12345678");
-        p.setNombres("Juan");
-        p.setApellidos("Perez");
-        p.setTelefono("999111222");
-        p.setCorreo("juan@correo.com");
-        p.setDireccion("Av. Lima 123");
+        p.setNumeroDocumento("74972221");
+        p.setNombres("Edgar");
+        p.setApellidos("Mora");
+        p.setTelefono("934381477");
+        p.setCorreo("edgaradrian@gmail.com");
+        p.setDireccion("Av.Belaunde Este 111");
         return p;
     }
 
@@ -132,10 +132,10 @@ class PacienteModelTest {
         Paciente existente = nuevoPaciente();
         existente.setId(1L);
         Paciente datos = new Paciente();
-        datos.setNombres("Juan Carlos");
-        datos.setApellidos("Perez Diaz");
-        datos.setTelefono("900000000");
-        datos.setCorreo("nuevo@correo.com");
+        datos.setNombres("Edgar Adrian");
+        datos.setApellidos("Mora Villegas");
+        datos.setTelefono("934381477");
+        datos.setCorreo("edgaradrian@correo.com");
         datos.setDireccion("Jr. Cusco 456");
 
         when(pacienteRepository.findById(1L)).thenReturn(Mono.just(existente));
@@ -144,10 +144,10 @@ class PacienteModelTest {
 
         StepVerifier.create(pacienteModel.Actualizar(1L, datos))
                 .assertNext(r -> {
-                    assertEquals("Juan Carlos", r.getNombres());
-                    assertEquals("900000000", r.getTelefono());
-                    assertEquals("nuevo@correo.com", r.getCorreo());
-                    assertEquals("12345678", r.getNumeroDocumento());
+                    assertEquals("Edgar Adrian", r.getNombres());
+                    assertEquals("934381477", r.getTelefono());
+                    assertEquals("edgaradrian@correo.com", r.getCorreo());
+                    assertEquals("74972221", r.getNumeroDocumento());
                 })
                 .verifyComplete();
     }
